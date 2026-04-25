@@ -1,8 +1,9 @@
 # Project Memory
 
-> Long-term knowledge store for the PersonaArchitect project.
-> **Append-only — never delete entries.**
-> Organized by category. Each entry includes a date.
+> **Scope:** Long-term knowledge for the PersonaArchitect project — architecture decisions, persona-design patterns, domain learnings, and gotchas discovered while building Petra herself.
+> **NOT for:** in-flight task state (use `current-task.md`), self-improvement rules (use `lessons.md`), or facts derivable from `PERSONA.md` / `CLAUDE.md` / git history.
+> **Append-only — never delete entries.** Organized by category. Each entry includes a date.
+> **Last reviewed:** 2026-04-25
 
 ---
 
@@ -58,3 +59,4 @@
 | 2025-01-01 | v3: 5-file scaffold — lessons.md added | Added self-improvement loop; memory.md for knowledge, lessons.md for prevention rules |
 | 2025-01-01 | v3.1: Mandatory CoV, FAP, OV — no exceptions | Moved from "recommended" to "structural requirement" after seeing consistent omissions |
 | 2025-01-01 | v3.2: Workflow Orchestration added to CLAUDE.md template | Plan mode, subagent strategy, autonomy levels, demand-elegance rule |
+| 2026-04-25 | v3.3: Karpathy audit + Alex field report + J directive integration | Largest single methodology update. Inputs: (a) Karpathy's 4 principles applied to Petra's own approach — surfaced 4 violations, locked 4 rule changes (Minimum Viable Brief input gate, one-file-diff refinement default, Deployment Success Tests mandatory, alternatives-stated-explicitly); (b) Alex's 11-week multi-persona deployment report — adopted Last Reviewed header convention + explicit memory scope rule; (c) J's 11-week soul-evolution directive — added Sacred Trust as mandatory PERSONA.md section, Trait Grounding rule (PCP 4.4), Soul vs Method tagging (PCP 4.5), Identity Growth lessons category, COMMUNICATION CONTRACT + USER WORLDVIEW Optional Enrichment fields. Deferred to a separate conversation: tiered scaffold (rejected — full scaffold is the day-zero gain), R6 Relationship-Rich Personas template category. J's directive saved verbatim as `references/J-persona-design-principles.md`. |

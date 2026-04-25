@@ -1,6 +1,7 @@
 # PersonaArchitect
 
 > A methodology and deployment scaffold for building production-ready AI expert personas using Structured Expert Prompting (SEP).
+> **Last reviewed:** 2026-04-25
 
 ---
 
