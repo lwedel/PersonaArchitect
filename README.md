@@ -75,7 +75,25 @@ Modular architecture solves this: each file has exactly one job, files can be up
 
 ## Mandatory Protocols
 
-Every persona produced by this methodology includes three non-negotiable protocols. These are not optional add-ons — they are structural requirements.
+Every persona produced by this methodology includes four non-negotiable structural elements plus a deployment success test. These are not optional add-ons — they are part of what "persona" means in this methodology.
+
+### 🔒 Sacred Trust
+
+**Declares the concrete actions that would break the relationship if violated.**
+
+Distinct from expertise scope (what the persona doesn't do because it's not their job) — Sacred Trust declares what the persona will *never* do because doing it would constitute betrayal of the user's trust.
+
+3–5 inviolable boundaries, declared in concrete (not aspirational) terms. Asked of the user upfront: *"What would break the relationship with this persona if violated?"* Generic answers like "be ethical" are rejected — they provide no actual constraint.
+
+| Domain | Example Sacred Trust Entries |
+|--------|------------------------------|
+| Trading / Finance | Never share keys; never share live edges; never expose user to undisclosed risk |
+| Marketing | Never publish under user's name without approval; never spend ad budget without ROI gate; never represent product as having features it doesn't |
+| Code Review | Never approve security holes; never silently rewrite user-authored logic; never bypass branch protections |
+
+Sacred Trust sits at the top of `PERSONA.md`, between Core Principles and Methodology — visible before any user request is processed.
+
+---
 
 ### ✅ Chain of Verification (CoV)
 
@@ -143,6 +161,20 @@ Domain-adapted evidence requirements:
 
 ---
 
+### 🧪 Deployment Success Tests
+
+**Proves the persona itself works in deployment, not just that the files have correct structure.**
+
+Three concrete checks, included in every `PERSONA.md`, runnable by the user on day one:
+
+1. **Correct-shape output** — a domain-typical request and the expected output shape. Pass = output is recognizably *this persona's* work, not a generic assistant.
+2. **Out-of-scope refusal** — a request deliberately outside the persona's expertise or constraints. Pass = refusal on principle (not capability), in the persona's voice.
+3. **Planted-error CoV catch** — a request containing a deliberate, domain-relevant error or trap. Pass = CoV flags it and the revision notes name what changed and why.
+
+CoV verifies thinking. OV verifies execution. Deployment Success Tests verify the persona itself works as advertised.
+
+---
+
 ## The Persona Construction Protocol (PCP)
 
 The 8-step process Petra follows when building any new persona:
@@ -151,11 +183,15 @@ The 8-step process Petra follows when building any new persona:
 Step 1: Domain Analysis          — Core field, sub-specialization, task analysis, user context
 Step 2: Credential Research      — Education, experience, certifications (specific, verifiable)
 Step 3: Methodology Design       — Named framework, 4–6 steps, output format
-Step 4: Voice Calibration        — Tone attributes, communication style, signature phrases
-Step 5: Constraint Definition    — Scope boundaries, quality standards, interaction rules
+Step 4: Voice Calibration        — Tone, signature phrases, trait grounding (every non-credential
+                                   trait references a real or planned-incident class), soul-vs-method
+                                   tagging (techniques never enter the soul)
+Step 5: Constraint Definition    — Scope boundaries, quality standards, interaction rules,
+                                   Sacred Trust (concrete relationship-violating actions)
 Step 6: Mandatory Protocol Integration — CoV, FAP, OV (domain-adapted, no exceptions)
-Step 7: Deployment Scaffold Generation — All 5 files with correct separation of concerns
-Step 8: Assembly & Polish        — Consistency check, practical additions, quick reference
+Step 7: Deployment Scaffold Generation — All 5 files with correct separation of concerns,
+                                   Last Reviewed headers, explicit memory scope rules
+Step 8: Assembly & Polish        — Consistency check, Deployment Success Tests, practical additions
 ```
 
 ---
@@ -177,8 +213,14 @@ Real experts have opinions and limits. Include what the persona refuses to do, w
 ### 5. Verification Is Non-Negotiable
 CoV, FAP, and OV are not features — they are the difference between a tool that generates text and a persona that operates like a senior expert.
 
-### 6. Personas Are Deployed, Not Just Written
+### 6. Forensic Thinking Is Foundational
+Real experts don't just solve problems — they diagnose root causes. The 5W2H investigative framework (Who, What, When, Where, Why, How, How Much) is adapted to each domain and used whenever the persona needs to investigate failures or perform root cause analysis. Forensic capability transforms a persona from "answer provider" to "problem solver."
+
+### 7. Personas Are Deployed, Not Just Written
 A persona document alone is not production-ready. It needs a session orchestrator, state tracking, persistent memory, and a self-improvement loop. The 5-file scaffold is the product.
+
+### 8. Operational Discipline Enables Expertise
+A persona without operational discipline is an expert who can't execute. Plan before building, verify before declaring done, learn from every mistake. The `CLAUDE.md` defines HOW the persona works, not just WHO it is.
 
 ---
 
@@ -207,30 +249,47 @@ Personas built with this methodology fall into five archetypes, each with specif
 
 ### Request a New Persona
 
-Tell Petra what you need:
+Petra requires only three fields to start (the **Minimum Viable Brief**):
 
 ```
 DOMAIN: [Field/specialty — e.g., "crypto quant trading"]
-TASK: [Primary responsibilities — e.g., "design and validate trading strategies"]
-USERS: [Who interacts — e.g., "the developer building the system"]
-TONE: [Preferred style — e.g., "direct, technical, no hand-holding"]
-OUTPUT: [Expected deliverables — e.g., "strategy specs, backtest configs, risk frameworks"]
-TECH STACK: [Languages and platforms — e.g., "Python, Freqtrade, Hyperliquid"]
-SPECIAL: [Any specific requirements — e.g., "needs a Diagnose mode for live trade post-mortems"]
+PRIMARY TASK: [What the persona is asked to do — e.g., "design and validate trading strategies"]
+EXAMPLE OUTPUT: [One concrete sample of what success looks like — e.g., "a strategy spec with entry/exit rules, risk parameters, and backtest config"]
 ```
 
-Petra will ask clarifying questions, then deliver all 5 deployment files ready to save directly into a project directory.
+Petra will state explicitly when she's working from a minimum brief and surface design tradeoffs (alternatives considered) on every non-trivial choice. You can always redirect.
 
-> **Note:** You never need to request CoV, FAP, OV, the deployment scaffold, or workflow orchestration rules. They are included automatically in every persona Petra builds.
+**Optional Enrichment** (front-load to tighten the design):
+
+```
+USERS: [Who interacts, their level]
+TONE: [Preferred style]
+TECH STACK: [Languages, frameworks, platforms]
+CONSTRAINTS: [Any limitations]
+SPECIAL: [Multiple modes? Code translation? Other quirks?]
+COMMUNICATION CONTRACT: [Daily digest vs on-demand? Tables vs prose? When does the persona ping vs wait?]
+USER WORLDVIEW: [Pragmatist vs theorist? Formality level? Stance the persona should mirror.]
+SACRED TRUST: [What would break the relationship with this persona if violated? Concrete, not aspirational.]
+```
+
+Petra will ask for `SACRED TRUST` explicitly if not provided — she will not invent inviolable boundaries on the user's behalf.
+
+> **Note:** You never need to request CoV, FAP, OV, Sacred Trust, the deployment scaffold, the Deployment Success Tests, or workflow orchestration rules. They are included automatically in every persona Petra builds.
 
 ### Refine an Existing Persona
 
 ```
 EXISTING PERSONA: [Reference or paste]
-CHANGE: [What to modify]
+CHANGE: [What to modify — be specific to file + section]
 REASON: [Why the change is needed]
-FILE: [Which file(s) need updating]
+SCOPE: [Only the named change | OR change + cascade to anything that goes stale]
 ```
+
+Default scope is *only the named change*. Petra will:
+
+- Touch only the requested file/section
+- Flag adjacent items in a severity-tagged "Noticed but not changed" list (`blocker | nice-to-have | cosmetic`) for you to decide on separately
+- **Cascade flags, never cascades silently** — if a change logically requires touching another file to stay consistent, Petra flags it and asks before applying
 
 ---
 
@@ -271,15 +330,18 @@ Every persona ships with an explicit autonomy table:
 
 ## Self-Improvement Loop
 
-`lessons.md` is not passive documentation — it is an active prevention system.
+`lessons.md` is not passive documentation — it is an active prevention system. It also tracks the persona's identity evolution, separately from prevention rules.
 
-After any correction from the user, the persona:
+**Prevention rules.** After any correction from the user, the persona:
+
 1. Records the **mistake** (what went wrong)
 2. Records the **correction** (what the right approach was)
 3. Writes a **prevention rule** as an imperative directive (`ALWAYS...` / `NEVER...`)
 4. Reviews all lessons at the **start of every session**
 
-The goal: mistake rate approaches zero over time, as patterns accumulate into a permanent knowledge base.
+**Identity Growth.** The persona's traits and values are seeded minimally and earn their weight incident by incident. Each evolution entry is tied to a specific event — never abstract, never assigned. Empty review periods are healthy data: maturity is principles compounding, not getting rewritten weekly.
+
+The goal: mistake rate approaches zero over time, while identity earns its weight through real contact with the work.
 
 ---
 
@@ -291,7 +353,11 @@ persona-architect/
 ├── PERSONA.md             ← Dr. Petra Vance — the Persona Architect
 ├── current-task.md        ← Active task template
 ├── memory.md              ← Long-term knowledge store
-├── lessons.md             ← Self-improvement log
+├── lessons.md             ← Self-improvement log (prevention rules + identity growth)
+├── references/            ← External directives Petra reads when relevant
+│   └── J-persona-design-principles.md  ← Soul-evolution directive (relationship-rich personas)
+├── CONTRIBUTING.md        ← Contribution guidelines
+├── LICENSE                ← MIT
 └── README.md              ← This document
 ```
 
