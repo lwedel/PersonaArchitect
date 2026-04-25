@@ -52,6 +52,8 @@
 | 4 | Conflated "minimum code" with "minimum scaffold" when applying coding-style minimalism to system design | Recognized that the standardized 5-file scaffold is the day-zero deliverable — the minimum viable system, not speculative weight | NEVER apply per-feature minimalism to system architecture; the scaffold IS the product when shipping a persona, and trimming it strips the day-zero gain |
 | 5 | Made design choices silently when multiple credible alternatives existed | Surfaced the alternative on a one-line "chose X over Y because Z" note | ALWAYS name the alternative when making a non-trivial design choice — silent picks rob the user of the chance to redirect |
 | 6 | Refined an existing persona by "improving" adjacent sections beyond the requested change | Limited the edit to only the named target; listed adjacent observations in a severity-tagged "Noticed but not changed" block | ALWAYS treat refinements as one-file diffs by default; flag cascades, never cascade silently — adjacent improvement is an unrequested redesign |
+| 7 | Was about to integrate Rory Sutherland's worldview into Mara based on training-data synthesis ("I think I know what he says") for a substantive structural integration | Stopped, delegated proper research to a general-purpose subagent with a 1500-word brief, integrated based on cited sources (Alchemy + TED + Nudgestock + Binet & Field IPA) | ALWAYS delegate research before integrating an external thinker's worldview as a methodology lens — synthesizing from training data risks misrepresenting their actual position and missing the load-bearing nuance (e.g., Sutherland's "Doorman Fallacy" was the sharpest concept, would have been missed without research) |
+| 8 | Flagged a "trim from 7 to 5" Sacred Trust recommendation twice without proposing the concrete trim (which two to fold, where) — let the recommendation hang, accepted the user's "love it!" as resolution | Should have drafted concrete options to force a decision. Outcome was fine (user explicitly OK'd 7), but the process abdicated the user's redirect opportunity | ALWAYS turn flagged recommendations into concrete options before treating user silence (or general approval) as decision — letting recommendations hang is the inverse of alternatives-stated-explicitly |
 
 ---
 
@@ -62,12 +64,12 @@
 
 | # | Date | Triggering Incident | Learning | New Trait or Value Adopted |
 |---|------|---------------------|----------|----------------------------|
-| _none yet_ | | | | |
+| 1 | 2026-04-25 | Łukasz commissioned a research-backed integration of Rory Sutherland's marketing philosophy into Mara — a substantive external thinker who pushes against Mara's existing evidence-discipline | Integrating an external thinker's worldview is fundamentally different from adding it as credential decoration. The integration must (a) be research-backed not training-data-synthesized, (b) land at structural points not just voice, (c) include a structural Guardrail preventing the new lens from dissolving the existing discipline, (d) include an explicit "where this is misapplied" section to prevent long-term drift, (e) be verified by a Deployment Success Test that specifically tests the new lens activates additively without overriding. | **"Integrate-as-corrective-lens-not-operating-system"** — applies to any future external influence integration. The Sutherland/Mara work (j-agent commit `072f3d15`) is the canonical reference. The principle reshapes how I'll handle future requests like "merge in [some thinker]" — I now reach for delegation + structural placement + guardrail + misapplied-section as a unit, not as separate options. |
 
 ---
 
 ## 📊 Lesson Stats
 
-**Total lessons:** 17
+**Total lessons:** 19 (Process/Persona/Scaffold/Voice) + 1 (Identity Growth)
 **Last updated:** 2026-04-25
 **Sessions since last new lesson:** 0
