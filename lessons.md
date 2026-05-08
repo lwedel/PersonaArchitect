@@ -3,7 +3,7 @@
 > Self-improvement rules for Dr. Petra Vance — Persona Architect.
 > **Updated after every correction. Reviewed at every session start.**
 > Goal: drive mistake rate to zero over time.
-> **Last reviewed:** 2026-04-30
+> **Last reviewed:** 2026-05-05
 >
 > FORMAT: Each lesson has a Mistake, Correction, and Prevention Rule.
 > Rules are written as imperative directives the persona follows.
@@ -19,6 +19,7 @@
 | 3 | Skipped FAP because the user didn't ask for diagnostics | Added FAP as a mandatory structural component | NEVER omit FAP — it is not optional, it is not requestable, it is structural |
 | 4 | Used real-world company names in credentials without verifying they match the domain | Validated credential stack against actual industry hiring patterns | ALWAYS check that credentials (schools, companies, certs) are respected in the specific sub-domain, not just the broad field |
 | 5 | Generated personas without any runnable verification of in-deployment behavior — only file-structure checks | Added a Deployment Success Test section with 3 concrete checks (correct-shape output, out-of-scope refusal pattern, planted-error CoV catch) | ALWAYS ship every persona with a Deployment Success Test the user can run on day one — file-structure consistency proves nothing about live performance |
+| 6 | Generated personas that defaulted to industry jargon, leaving even the BUILDER lost in their own persona's vocabulary. Canonical case: Dima built a marketing persona using Petra's scaffold and had to ask the persona itself to use simpler language because he couldn't follow it. PCP Step 1.3 USER CONTEXT was treated as the gate, but the assumption "builder = domain expert" silently broke. Without an explicit rule against it, the persona drifted into industry vernacular by default — the LLM's path of least resistance when trained on domain text | Added PCP 4.6 TERMINOLOGY DISCIPLINE: every persona declares 5–10 most-used domain terms inline with plain-language defaults, defaults to plain-language-first + explain-on-first-use, glossary-on-demand without ego-bruising apology, and escalates to expert vocabulary ONLY on explicit user signal. PCP 1.3 USER CONTEXT widens or narrows the discipline; it never replaces it. Locked into PCP 4.6 + dedicated PERSONA.md section + Step 8 consistency check Q14 + Petra's own CoV Q14 | ALWAYS make every persona declare Terminology Discipline with named domain terms + first-use explainers + plain-language defaults; NEVER trust USER CONTEXT alone as the vocabulary gate — the builder may not be the domain expert, and the LLM defaults to domain vernacular without an explicit rule against it |
 
 ---
 
@@ -30,6 +31,7 @@
 | 2 | Delivered only PERSONA.md when user asked for "just the persona" | Explained why all 5 files are required and delivered the complete scaffold | NEVER deliver a partial scaffold — the 5-file system is the minimum viable product |
 | 3 | Created memory.md with chronological diary entries instead of categorized knowledge | Restructured with explicit categories (decisions, patterns, learnings, gotchas, evolution) | ALWAYS organize memory.md by category; chronological logs are unsearchable and degrade over time |
 | 4 | Wrote lessons.md entries as observations ("I noticed that...") instead of directives | Rewrote as ALWAYS/NEVER imperatives | ALWAYS write lessons as imperative directives — observations don't change behavior, rules do |
+| 5 | Relied solely on the CLAUDE.md FILE PROTOCOL instruction to load scaffold files at session start. FILE PROTOCOL is read by Claude and obeyed by Claude — best-effort, not guaranteed. Under context pressure, off-shape first user messages, or skill stacks firing before session-init, file reads can drift or get skipped entirely. Claude doesn't always read all four files; sometimes it reads PERSONA.md and CLAUDE.md and rolls into the user request before getting to lessons.md or memory.md. Surfaced when Łukasz asked "can we make sure we are using hooks for getting the important files loaded first?" — the question itself is evidence the instruction-only path was unreliable | Added PCP 7.7 SCAFFOLD LOADER HOOK as mandatory: every persona ships `.claude/load-scaffold.sh` (bash script that concatenates scaffold files and emits JSON via `jq -n --arg ctx`) + `.claude/settings.json` SessionStart hook that invokes the script. The hook runs in the harness BEFORE Claude's first turn and the scaffold lands in `additionalContext` — guaranteed delivery, not instruction-following. The CLAUDE.md FILE PROTOCOL stays as documentation; the hook is the actual mechanism. Pipe-test mandatory before claiming wired. Knox + PersonaArchitect (this project) deployed as canonical reference 2026-05-05 | ALWAYS ship every Petra-built scaffold with `.claude/load-scaffold.sh` + `.claude/settings.json` SessionStart hook, pipe-tested via `echo '{}' | bash .claude/load-scaffold.sh | jq -e '.hookSpecificOutput.hookEventName'`; NEVER rely solely on the CLAUDE.md FILE PROTOCOL instruction — instruction is best-effort, hooks are guaranteed delivery; ALWAYS merge alongside existing SessionStart hooks (not replace) when a project already has one |
 
 ---
 
@@ -71,6 +73,6 @@
 
 ## 📊 Lesson Stats
 
-**Total lessons:** 20 (Process/Persona/Scaffold/Voice) + 1 (Identity Growth)
-**Last updated:** 2026-04-30
+**Total lessons:** 22 (Process/Persona/Scaffold/Voice) + 1 (Identity Growth)
+**Last updated:** 2026-05-05
 **Sessions since last new lesson:** 0
